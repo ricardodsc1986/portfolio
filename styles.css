@@ -329,3 +329,42 @@ body {
     color: whitesmoke;
     font-style: italic;
 }
+
+@media (max-width: 768px) {
+    .portfolio, .portfolio-b {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .project, .project-b {
+        flex-basis: 90%;
+    }
+
+    .skills ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .about p {
+        font-size: 1em;
+    }
+
+    .profile-photo {
+        width: 120px;
+    }
+
+    .project, .project-b {
+        flex-basis: 100%;
+    }
+}

@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-function moveCarousel(direction, carouselId) {
-    const carousel = document.querySelector(`.${carouselId} .carousel-container`);
-    const slides = document.querySelectorAll(`.${carouselId} .carousel-slide`);
+let currentIndex = 0;
+
+function moveCarousel(direction, carouselType) {
+    const slides = document.querySelectorAll(`.${carouselType} .carousel-slide`);
     const totalSlides = slides.length;
-    let currentIndex = parseInt(carousel.dataset.index || "0");
 
     currentIndex += direction;
 
@@ -29,22 +29,25 @@ function moveCarousel(direction, carouselId) {
         currentIndex = 0;
     }
 
-    carousel.dataset.index = currentIndex;
-    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    updateCarousel(carouselType, currentIndex);
 }
 
-function moveToSlide(index, carouselId) {
-    const carousel = document.querySelector(`.${carouselId} .carousel-container`);
-    carousel.dataset.index = index;
-    carousel.style.transform = `translateX(-${index * 100}%)`;
+function moveToSlide(index, carouselType) {
+    updateCarousel(carouselType, index);
 }
 
 function updateCarousel(carouselType, index) {
     const carouselContainer = document.querySelector(`.${carouselType} .carousel`);
     carouselContainer.style.transform = `translateX(-${index * 100}%)`;
 
+    
     const dots = document.querySelectorAll(`.${carouselType} .dot`);
     dots.forEach((dot, idx) => {
         dot.classList.toggle("active", idx === index);
     });
+
+   
+    currentIndex = index;
 }
+
+

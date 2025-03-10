@@ -38,3 +38,13 @@ function moveToSlide(index, carouselId) {
     carousel.dataset.index = index;
     carousel.style.transform = `translateX(-${index * 100}%)`;
 }
+
+function updateCarousel(carouselType, index) {
+    const carouselContainer = document.querySelector(`.${carouselType} .carousel`);
+    carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+
+    const dots = document.querySelectorAll(`.${carouselType} .dot`);
+    dots.forEach((dot, idx) => {
+        dot.classList.toggle("active", idx === index);
+    });
+}

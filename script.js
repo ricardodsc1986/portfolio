@@ -15,54 +15,18 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-        let currentIndexA = 0;
-        let currentIndexB = 0;
+function moveCarousel(direction, carouselId) {
+    const carousel = document.querySelector(`#${carouselId} .carousel-container`);
+    const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
+    let currentIndex = Array.from(slides).findIndex(slide => slide.style.display !== "none");
 
-        function moveCarousel(direction, carouselType) {
-            const slides = document.querySelectorAll(`.${carouselType} .carousel-slide`);
-            const totalSlides = slides.length;
+    slides[currentIndex].style.display = "none";
+    let newIndex = (currentIndex + direction + slides.length) % slides.length;
+    slides[newIndex].style.display = "block";
+}
 
-            if (carouselType === 'portfolio-b') {
-                currentIndexB += direction;
-                if (currentIndexB < 0) {
-                    currentIndexB = totalSlides - 1;
-                } else if (currentIndexB >= totalSlides) {
-                    currentIndexB = 0;
-                }
-                updateCarousel('portfolio-b', currentIndexB);
-            } else {
-                currentIndexA += direction;
-                if (currentIndexA < 0) {
-                    currentIndexA = totalSlides - 1;
-                } else if (currentIndexA >= totalSlides) {
-                    currentIndexA = 0;
-                }
-                updateCarousel('portfolio', currentIndexA);
-            }
-        }
-
-        function moveToSlide(index, carouselType) {
-            const slides = document.querySelectorAll(`.${carouselType} .carousel-slide`);
-            const totalSlides = slides.length;
-
-            if (index < 0 || index >= totalSlides) return;
-
-            if (carouselType === 'portfolio-b') {
-                currentIndexB = index;
-                updateCarousel('portfolio-b', currentIndexB);
-            } else {
-                currentIndexA = index;
-                updateCarousel('portfolio', currentIndexA);
-            }
-        }
-
-        function updateCarousel(carouselType, index) {
-            const carouselContainer = document.querySelector(`.${carouselType} .carousel-container`);
-            carouselContainer.style.transform = `translateX(-${index * 100}%)`;
-
-
-            const dots = document.querySelectorAll(`.${carouselType} .dot`);
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === index);
-            });
-        }
+function moveToSlide(index, carouselId) {
+    const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
+    slides.forEach(slide => slide.style.display = "none");
+    slides[index].style.display = "block";
+}

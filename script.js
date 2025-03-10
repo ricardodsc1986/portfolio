@@ -30,3 +30,14 @@ function moveToSlide(index, carouselId) {
     slides.forEach(slide => slide.style.display = "none");
     slides[index].style.display = "block";
 }
+
+        function updateCarousel(carouselType, index) {
+            const carouselContainer = document.querySelector(`.${carouselType} .carousel-container`);
+            carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+
+
+            const dots = document.querySelectorAll(`.${carouselType} .dot`);
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === index);
+            });
+        }

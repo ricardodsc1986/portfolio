@@ -15,17 +15,25 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function moveCarousel(direction, carouselId) {
-    const carousel = document.querySelector(`#${carouselId} .carousel-container`);
-    const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
-    let currentIndex = Array.from(slides).findIndex(slide => slide.style.display !== "none");
+    const carousel = document.querySelector(`.${carouselId} .carousel-container`);
+    const slides = document.querySelectorAll(`.${carouselId} .carousel-slide`);
+    const totalSlides = slides.length;
+    let currentIndex = parseInt(carousel.dataset.index || "0");
 
-    slides[currentIndex].style.display = "none";
-    let newIndex = (currentIndex + direction + slides.length) % slides.length;
-    slides[newIndex].style.display = "block";
+    currentIndex += direction;
+
+    if (currentIndex < 0) {
+        currentIndex = totalSlides - 1;
+    } else if (currentIndex >= totalSlides) {
+        currentIndex = 0;
+    }
+
+    carousel.dataset.index = currentIndex;
+    carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
 function moveToSlide(index, carouselId) {
-    const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
-    slides.forEach(slide => slide.style.display = "none");
-    slides[index].style.display = "block";
+    const carousel = document.querySelector(`.${carouselId} .carousel-container`);
+    carousel.dataset.index = index;
+    carousel.style.transform = `translateX(-${index * 100}%)`;
 }

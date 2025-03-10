@@ -431,14 +431,14 @@ body {
     height: 10px;
     width: 10px;
     margin: 0 5px;
-    background-color: #696969;
+    background-color: #bbb;
     border-radius: 50%;
     display: inline-block;
     cursor: pointer;
 }
 
 .dot.active {
-    background-color: #696969;
+    background-color: #000000;
 }
 
 @media (max-width: 1024px) {

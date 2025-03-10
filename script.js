@@ -13,3 +13,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 700); 
     }, 4000); 
 });
+
+function moveCarousel(direction, carouselId) {
+    const carousel = document.querySelector(`#${carouselId} .carousel-container`);
+    const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
+    let currentIndex = Array.from(slides).findIndex(slide => slide.style.display !== "none");
+
+    slides[currentIndex].style.display = "none";
+    let newIndex = (currentIndex + direction + slides.length) % slides.length;
+    slides[newIndex].style.display = "block";
+}
+
+function moveToSlide(index, carouselId) {
+    const slides = document.querySelectorAll(`#${carouselId} .carousel-slide`);
+    slides.forEach(slide => slide.style.display = "none");
+    slides[index].style.display = "block";
+}
